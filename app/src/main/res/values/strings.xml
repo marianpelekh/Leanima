@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Leanima</string>
+    <string name="charcoal_image">https://au.coachoutlet.com/dw/image/v2/BDFS_PRD/on/demandware.static/-/Sites-coach-master-catalog/default/dw63743659/images/CR905/C_CR905CQ_BK_2.jpg</string>
+    <string name="ruby_image">https://m.media-amazon.com/images/I/714UY5swxTL._AC_UY1000_.jpg</string>
+    <string name="view_button">Переглянути</string>
+    <string name="item_image">Зображення товару</string>
+</resources>
