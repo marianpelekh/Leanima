@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: mH04122005Op
-      MYSQL_DATABASE: leanima
+      MYSQL_DATABASE: leanima_db
       MYSQL_USER: marianpelekh
       MYSQL_PASSWORD: mH04122005Op
     ports:

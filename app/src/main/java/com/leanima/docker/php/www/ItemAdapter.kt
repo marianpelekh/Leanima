@@ -1,5 +1,7 @@
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leanima.R
@@ -16,13 +18,29 @@ class ItemAdapter(private val items: List<Item>) : RecyclerView.Adapter<ItemView
         holder.itemName.text = item.type + " " + '"' + item.name + '"'
         holder.itemPrice.text = "${item.price} грн"
 
-        // Use the drawable resource or Glide
-        val imageResId = holder.itemView.context.resources.getIdentifier(item.imageUrl, "drawable", holder.itemView.context.packageName)
-        if (imageResId != 0) {
-            holder.itemImage.setImageResource(imageResId)
-        } else {
-            Glide.with(holder.itemView.context).load(item.imageUrl).into(holder.itemImage)
+
+        fun getResourceIdFromReference(reference: String, context: Context): Int {
+            // Видалення префіксу "@drawable/"
+            val resourceName = reference.replace("@drawable/", "")
+            // Отримання ідентифікатора ресурсу
+            return context.resources.getIdentifier(resourceName, "drawable", context.packageName)
         }
+
+        // Приклад використання в адаптері RecyclerView
+        val imageResId = getResourceIdFromReference(item.imageUrl, holder.itemView.context)
+
+// Завантаження зображення
+        if (imageResId != 0) {
+            Glide.with(holder.itemView.context)
+                .load(imageResId)
+                .into(holder.itemImage)
+        } else {
+            // Обробка випадку, коли ресурс не знайдено
+            Glide.with(holder.itemView.context)
+                .load(R.drawable.default_image) // або інший стандартний ресурс
+                .into(holder.itemImage)
+        }
+
     }
 
     override fun getItemCount(): Int = items.size
