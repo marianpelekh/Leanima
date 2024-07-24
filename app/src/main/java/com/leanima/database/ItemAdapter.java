@@ -2,6 +2,7 @@ package com.leanima.database;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     public ItemAdapter(List<Item> items) {
         this.items = items;
+        Log.i("ItemAdapter", "Item adapter called" + items);
     }
 
     @NonNull

@@ -1,8 +1,13 @@
 package com.leanima.database;
 
-import java.sql.*;
-import java.util.ArrayList;
+import android.util.Log;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public final class GoodsModel {
 
@@ -14,7 +19,6 @@ public final class GoodsModel {
         public int discount;
         public String imageURL;
         public String size;
-
     }
 
     private Connection conn = null;
@@ -25,10 +29,23 @@ public final class GoodsModel {
 
     private boolean openConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/database", "user", "pw");
+            // Зареєструйте драйвер JDBC
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            // Вказівка URL, імені користувача та пароля
+            String url = "jdbc:sqlserver://192.168.170.111\\SQLEXPRESS;databaseName=leanima_db";
+            String username = "marianpelekh";
+            String password = "mH04122005Op";
+
+            // Створення з'єднання
+            conn = DriverManager.getConnection(url, username, password);
             return true;
-        } catch (Exception e) {
+        }  catch (ClassNotFoundException e) {
+            System.err.println("JDBC Driver не знайдено.");
+            e.printStackTrace();
+            return false;
+        } catch (SQLException e) {
+            System.err.println("Помилка з'єднання з базою даних. " + e);
             e.printStackTrace();
             return false;
         }
@@ -47,33 +64,45 @@ public final class GoodsModel {
     }
 
     public ArrayList<good> getGoods() {
-        if (!openConnection())
-            return null;
-
-        final String query = "SELECT * FROM goods";
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeQuery(query);
-
-            ArrayList<good> goods = new ArrayList<good>();
-
-            ResultSet result = stmt.getResultSet();
-            while(result.next()) {
-                good temp = new good();
-                temp.type = result.getNString("type");
-                temp.name = result.getNString("name");
-                temp.description = result.getNString("description");
-                temp.price = result.getInt("price");
-                temp.discount = result.getInt("discount");
-                temp.imageURL = result.getNString("imageURL");
-                temp.size = result.getNString("size");
-                goods.add(temp);
-            }
-            return goods;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            closeConnection();
+        if (!openConnection()) {
+            Log.e("GoodsModel", "Failed to open database connection.");
             return null;
         }
+
+        final String query = "SELECT * FROM goods";
+        ArrayList<good> goods = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            // Перевірка, чи є дані у ResultSet
+            if (!result.isBeforeFirst()) {
+                Log.w("GoodsModel", "No data found in the database.");
+            }
+
+            while (result.next()) {
+                good temp = new good();
+                temp.type = result.getString("type");
+                temp.name = result.getString("name");
+                temp.description = result.getString("description");
+                temp.price = result.getInt("price");
+                temp.discount = result.getInt("discount");
+                temp.imageURL = result.getString("imageURL");
+                temp.size = result.getString("size");
+                goods.add(temp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        // Перевірка, чи отримано дані
+        if (goods.isEmpty()) {
+            Log.w("GoodsModel", "The list of goods is empty.");
+        }
+
+        return goods;
     }
 }

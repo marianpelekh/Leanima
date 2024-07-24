@@ -1,5 +1,7 @@
 package com.leanima.database;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -28,6 +30,7 @@ public class ItemViewModel extends ViewModel {
     private class LoadItemsTask implements Runnable {
         @Override
         public void run() {
+            Log.i("Load Items Task", "Method is called");
             GoodsModel model = new GoodsModel();
             ArrayList<GoodsModel.good> goods = model.getGoods();
             List<Item> itemList = new ArrayList<>();

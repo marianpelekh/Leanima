@@ -1,23 +1,20 @@
 package com.leanima;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.leanima.database.ItemAdapter;
 import com.leanima.database.ItemViewModel;
-import com.leanima.database.entity.Item;
 
 import java.util.Collections;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ItemViewModel itemViewModel;
     private ItemAdapter itemAdapter;
 
     @Override
@@ -31,9 +28,17 @@ public class MainActivity extends AppCompatActivity {
         itemAdapter = new ItemAdapter(Collections.emptyList());
         recyclerView.setAdapter(itemAdapter);
 
-        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        ItemViewModel itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
-        itemViewModel.getItems().observe(this, items -> itemAdapter.setItems(items));
+        itemViewModel.getItems().observe(this, items -> {
+            if (!items.isEmpty()) {
+                itemAdapter.setItems(items);
+                Log.i("MainActivity", "Items" + items);
+            } else {
+                Log.e("MainActivity", "Null of items");
+            }
+        });
+
 
         itemViewModel.loadItems();
     }
