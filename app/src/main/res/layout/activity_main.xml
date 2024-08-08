@@ -67,6 +67,7 @@
                 android:gravity="end"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="Вітаємо в магазині Leanima!"
                 android:textSize="26sp"
                 android:textColor="@color/white"
@@ -146,6 +147,91 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:background="@color/brown"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/latte">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:fontFamily="@font/monofett"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center">
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="20dp"
+                    android:elevation="4dp"
+                    android:background="@drawable/footer_button"
+                    android:gravity="center"
+                    android:src="@drawable/instagram"
+                    android:scaleType="centerInside"
+                    android:padding="5dp" />
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="20dp"
+                    android:elevation="4dp"
+                    android:background="@drawable/footer_button"
+                    android:gravity="center"
+                    android:src="@drawable/facebook"
+                    android:scaleType="centerInside"
+                    android:padding="5dp" />
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="20dp"
+                    android:elevation="4dp"
+                    android:background="@drawable/footer_button"
+                    android:gravity="center"
+                    android:src="@drawable/phone"
+                    android:scaleType="centerInside"
+                    android:padding="5dp" />
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="20dp"
+                    android:elevation="4dp"
+                    android:background="@drawable/footer_button"
+                    android:gravity="center"
+                    android:src="@drawable/web"
+                    android:scaleType="centerInside"
+                    android:padding="5dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-20dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/footer_rights"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

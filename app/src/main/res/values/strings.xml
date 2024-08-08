@@ -4,4 +4,8 @@
     <string name="ruby_image">https://m.media-amazon.com/images/I/714UY5swxTL._AC_UY1000_.jpg</string>
     <string name="view_button">Переглянути</string>
     <string name="item_image">Зображення товару</string>
+    <string name="footer_contacts_title">Контакти:</string>
+    <string name="footer_contacts_phone">+380XXXXXXXXX</string>
+    <string name="footer_contacts_email">leanima_info@gmail.com</string>
+    <string name="footer_rights">All rights are reserved.</string>
 </resources>
